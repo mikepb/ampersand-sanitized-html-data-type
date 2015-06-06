@@ -53,6 +53,16 @@ module.exports = function (dataType) {
         tag: -1
       }, "value"))
     });
+
+    it("should not croak on undefined", function () {
+      assert(!dataType.compare(void 0, {
+        raw: "Hello World!"
+      }, "value"))
+      assert(!dataType.compare({
+        raw: "Hello World!"
+      }, void 0, "value"))
+      assert(dataType.compare(void 0, void 0, "value"))
+    });
   });
 
   describe("#get", function () {
