@@ -1,6 +1,6 @@
 {
   "name": "ampersand-sanitized-html-data-type",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "index.js",
   "browser": "client.js",
