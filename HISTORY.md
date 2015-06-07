@@ -1,3 +1,9 @@
+0.0.4 / 2015-06-07
+==================
+
+  * Fixed: Return correct value when setting correctly tagged value.
+
+
 0.0.3 / 2015-06-06
 ==================
 
