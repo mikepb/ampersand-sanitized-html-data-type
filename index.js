@@ -1,11 +1,19 @@
 "use strict";
 
 /**
+ * Module dependencies.
+ */
+
+var sanitized = require("./lib/sanitized");
+
+/**
  * Export mixin with sanitized HTML data type.
  */
 
-module.exports = {
-  dataTypes: {
-    html: require("./lib/sanitized")
-  }
+exports = module.exports = function (options) {
+  return {dataTypes: {html: sanitized(options)}};
+};
+
+exports.dataTypes = {
+  html: sanitized()
 };

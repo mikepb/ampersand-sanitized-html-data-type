@@ -54,6 +54,26 @@ module.exports = Model.extend(htmlMixin, {
 });
 ```
 
+To use different options for Gumbo Sanitize, pass the appropriate string. The
+supported values are `"STRICT"`, `"BASIC"`, and `"RELAXED"`:
+
+```js
+var Model = require("ampersand-model");
+var htmlMixin = require("ampersand-sanitized-html-data-type")("RELAXED");
+```
+
+To provide custom options to Gumbo Sanitize, you may pass an object:
+
+```js
+var Model = require("ampersand-model");
+var htmlMixin = require("ampersand-sanitized-html-data-type")({
+  elements: ["i"]
+});
+```
+
+Configuration options are ignored on the client.
+
+
 ## License
 
 MIT

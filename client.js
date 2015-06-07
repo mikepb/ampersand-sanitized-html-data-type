@@ -1,11 +1,19 @@
 "use strict";
 
 /**
+ * Module dependencies.
+ */
+
+var unsafe = require("./lib/unsafe");
+
+/**
  * Export mixin with unsafe HTML data type.
  */
 
-module.exports = {
-  dataTypes: {
-    html: require("./lib/unsafe")
-  }
+exports = module.exports = function (options) {
+  return {dataTypes: {html: unsafe}};
+};
+
+exports.dataTypes = {
+  html: unsafe
 };

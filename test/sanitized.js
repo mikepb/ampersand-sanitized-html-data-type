@@ -3,10 +3,9 @@
 const tag = 1;
 
 var assert = require("assert");
-var dataType = require("../lib/sanitized");
 
-describe("Sanitized HTML", function () {
-  describe("#set", function () {
+module.exports = function (description, dataType, relax) {
+  describe(description, function () {
     it("should accept a string", function () {
       assert.deepEqual(dataType.set("Hello World!"), {
         type: "html",
@@ -109,7 +108,37 @@ describe("Sanitized HTML", function () {
         }
       });
     });
-  });
 
-  require("./common")(dataType);
-});
+    if (relax) {
+
+      it("should sanitize HTML and keep the DIV", function () {
+        assert.deepEqual(dataType.set({
+          raw: "<div><b><script>Hello World!</script></b></div>"
+        }), {
+          type: "html",
+          val: {
+            raw: "<div><b><script>Hello World!</script></b></div>",
+            html: "<div><b>Hello World!</b></div>",
+            tag: tag
+          }
+        });
+      });
+
+    } else {
+
+      it("should sanitize HTML and strip the DIV", function () {
+        assert.deepEqual(dataType.set({
+          raw: "<div><b><script>Hello World!</script></b></div>"
+        }), {
+          type: "html",
+          val: {
+            raw: "<div><b><script>Hello World!</script></b></div>",
+            html: " <b>Hello World!</b> ",
+            tag: tag
+          }
+        });
+      });
+
+    }
+  });
+};
