@@ -1,5 +1,7 @@
 "use strict";
 
+const tag = 1;
+
 var assert = require("assert");
 var dataType = require("../lib/unsafe");
 
@@ -30,6 +32,21 @@ describe("Unsafe HTML", function () {
         type: "html",
         val: {
           raw: "Hello World!"
+        }
+      });
+    });
+
+    it("should not touch a valid tagged object", function () {
+      assert.deepEqual(dataType.set({
+        raw: "Hello World!",
+        html: "html",
+        tag: tag
+      }), {
+        type: "html",
+        val: {
+          raw: "Hello World!",
+          html: "html",
+          tag: tag
         }
       });
     });

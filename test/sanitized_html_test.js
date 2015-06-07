@@ -40,6 +40,21 @@ describe("Sanitized HTML", function () {
       });
     });
 
+    it("should not touch a valid tagged object", function () {
+      assert.deepEqual(dataType.set({
+        raw: "Hello World!",
+        html: "html",
+        tag: tag
+      }), {
+        type: "html",
+        val: {
+          raw: "Hello World!",
+          html: "html",
+          tag: tag
+        }
+      });
+    });
+
     it("should sanitize a mistagged object", function () {
       assert.deepEqual(dataType.set({
         raw: "Hello World!",
