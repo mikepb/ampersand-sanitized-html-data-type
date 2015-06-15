@@ -3,6 +3,8 @@
 var assert = require("assert");
 
 module.exports = function (dataType) {
+  var sign = "8fL/sSup6xt6O+sXrbYs3RyqDjQ";
+
   describe("#compare", function () {
     it("should compare equal values", function () {
       assert(dataType.compare({
@@ -16,7 +18,7 @@ module.exports = function (dataType) {
       assert(dataType.compare({
         raw: "<script>Hello World!</script>",
         html: "Hello World!",
-        tag: 1
+        sign: sign
       }, {
         raw: "<script>Hello World!</script>",
       }, "value"))
@@ -34,11 +36,11 @@ module.exports = function (dataType) {
       assert(!dataType.compare({
         raw: "<script>Hello World!</script>",
         html: "Hello World!",
-        tag: 1
+        sign: sign
       }, {
         raw: "<script>Goodbye World!</script>",
         html: "Goodbye World!",
-        tag: 1
+        sign: sign
       }, "value"))
     });
 
@@ -46,11 +48,11 @@ module.exports = function (dataType) {
       assert(dataType.compare({
         raw: "<script>Hello World!</script>",
         html: "Hello World!",
-        tag: 1
+        sign: sign
       }, {
         raw: "<script>Hello World!</script>",
         html: "<script>Hello World!</script>",
-        tag: -1
+        sign: "-1"
       }, "value"))
     });
 
@@ -66,25 +68,25 @@ module.exports = function (dataType) {
   });
 
   describe("#get", function () {
-    it("should get a raw value", function () {
+    it("should not get a raw value", function () {
       assert.equal(dataType.get({
         raw: "<script>Hello World!</script>"
-      }), "<script>Hello World!</script>");
+      }), void 0);
     });
 
     it("should get a sanitized value", function () {
       assert.equal(dataType.get({
         raw: "<script>Hello World!</script>",
         html: "Hello World!",
-        tag: 1
+        sign: sign
       }), "Hello World!");
     });
 
-    it("should get a mistagged sanitized value", function () {
+    it("should get a missigned sanitized value", function () {
       assert.equal(dataType.get({
         raw: "<script>Hello World!</script>",
         html: "Goodbye World!",
-        tag: -1
+        sign: ""
       }), "Goodbye World!");
     });
 

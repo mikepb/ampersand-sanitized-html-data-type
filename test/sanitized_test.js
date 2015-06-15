@@ -12,20 +12,23 @@ describe("Default Sanitized HTML", function () {
   require("./common")(dataType);
 });
 
-describe("Default Sanitized HTML with custom tag", function () {
-  var customTag = Date.now();
-  var dataType = sanitized(null, customTag);
+describe("Default Sanitized HTML with custom secret", function () {
+  var options = {secret: "xyzzy"};
+  Object.keys(sanitize.BASIC).forEach(function (key) {
+    options[key] = sanitize.BASIC[key];
+  });
+  var dataType = sanitized(options);
   it("should sanitize mismatching tags on set", function () {
     assert.deepEqual(dataType.set({
-      raw: "<script>Hello World!</script>",
+      raw: "<p><script>Hello World!</script></p>",
       html: "html",
-      tag: tag
+      sign: "tag"
     }), {
       type: "html",
       val: {
-        raw: "<script>Hello World!</script>",
-        html: "Hello World!",
-        tag: customTag
+        raw: "<p><script>Hello World!</script></p>",
+        html: "<p>Hello World!</p>",
+        sign: "GEBCuTY0LcMGJFPkWCg+zXmUmPw"
       }
     });
   });

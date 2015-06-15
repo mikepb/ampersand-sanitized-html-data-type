@@ -1,17 +1,22 @@
 "use strict";
 
-const tag = 1;
-
 var assert = require("assert");
 
 module.exports = function (description, dataType, relax) {
+  var plain = relax ? "rc02ZCuezMnpkA+3qssGnUDmmto" : "vKRymzZOZYWoshRBgrJ01qH4rY8";
+  var inScript = relax ? "R2i7IAFAuB9QVxnvuCK0Xr4/hZE" : "379xCu0dmutbkDWBNK5KAIpZ0/Q";
+  var xssScript = relax ? "pi8ugbcuncL4d/+QfoQcrWrtdPQ" : "NkrP4k00G4E1xRMo1CTVLIh/fzI";
+  var bScript = relax ? "Tde+ZuljsgFIu1TKfaUF8mtJdAY" : "ah2Diy0Ate1E88Luti+kmgl9gGU";
+  var inDiv = relax ? "Xawb0oXuz3dmmLyt0TAzGrb9/co" : "mebOqn4xIhGGmBwxIbE1a7moMCg";
+
   describe(description, function () {
     it("should accept a string", function () {
       assert.deepEqual(dataType.set("Hello World!"), {
         type: "html",
         val: {
           raw: "Hello World!",
-          tag: tag
+          html: "Hello World!",
+          sign: plain
         }
       });
     });
@@ -22,7 +27,18 @@ module.exports = function (description, dataType, relax) {
         val: {
           raw: "<script>Hello World!</script>",
           html: "Hello World!",
-          tag: tag
+          sign: inScript
+        }
+      });
+    });
+
+    it("should sanitize an HTML signature without content", function () {
+      assert.deepEqual(dataType.set("<script src='http://xss-attack'></script>"), {
+        type: "html",
+        val: {
+          raw: "<script src='http://xss-attack'></script>",
+          html: "",
+          sign: xssScript
         }
       });
     });
@@ -34,36 +50,38 @@ module.exports = function (description, dataType, relax) {
         type: "html",
         val: {
           raw: "Hello World!",
-          tag: tag
+          html: "Hello World!",
+          sign: plain
         }
       });
     });
 
-    it("should not touch a valid tagged object", function () {
+    it("should not touch a valid signed object", function () {
       assert.deepEqual(dataType.set({
         raw: "Hello World!",
         html: "html",
-        tag: tag
+        sign: plain
       }), {
         type: "html",
         val: {
           raw: "Hello World!",
           html: "html",
-          tag: tag
+          sign: plain
         }
       });
     });
 
-    it("should sanitize a mistagged object", function () {
+    it("should sanitize a missigned object", function () {
       assert.deepEqual(dataType.set({
         raw: "Hello World!",
         html: "html",
-        tag: "tag"
+        sign: "tag"
       }), {
         type: "html",
         val: {
           raw: "Hello World!",
-          tag: tag
+          html: "Hello World!",
+          sign: plain
         }
       });
     });
@@ -76,22 +94,22 @@ module.exports = function (description, dataType, relax) {
         val: {
           raw: "<script>Hello World!</script>",
           html: "Hello World!",
-          tag: tag
+          sign: inScript
         }
       });
     });
 
-    it("should sanitize a mistagged HTML object", function () {
+    it("should sanitize a missigned HTML object", function () {
       assert.deepEqual(dataType.set({
         raw: "<script>Hello World!</script>",
         html: "html",
-        tag:  "tag"
+        sign:  "tag"
       }), {
         type: "html",
         val: {
           raw: "<script>Hello World!</script>",
           html: "Hello World!",
-          tag: tag
+          sign: inScript
         }
       });
     });
@@ -104,7 +122,7 @@ module.exports = function (description, dataType, relax) {
         val: {
           raw: "<b><script>Hello World!</script></b>",
           html: "<b>Hello World!</b>",
-          tag: tag
+          sign: bScript
         }
       });
     });
@@ -119,7 +137,7 @@ module.exports = function (description, dataType, relax) {
           val: {
             raw: "<div><b><script>Hello World!</script></b></div>",
             html: "<div><b>Hello World!</b></div>",
-            tag: tag
+            sign: inDiv
           }
         });
       });
@@ -134,7 +152,7 @@ module.exports = function (description, dataType, relax) {
           val: {
             raw: "<div><b><script>Hello World!</script></b></div>",
             html: " <b>Hello World!</b> ",
-            tag: tag
+            sign: inDiv
           }
         });
       });
