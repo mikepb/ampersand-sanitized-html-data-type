@@ -1,3 +1,10 @@
+0.2.0 / 2015-06-14
+==================
+
+  * Changed: Use cryptographic signature on sanitization options to prevent
+    some attack scenarios.
+
+
 0.1.1 / 2015-06-07
 ==================
 

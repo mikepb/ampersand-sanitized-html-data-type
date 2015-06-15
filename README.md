@@ -67,11 +67,14 @@ To provide custom options to Gumbo Sanitize, you may pass an object:
 ```js
 var Model = require("ampersand-model");
 var htmlMixin = require("ampersand-sanitized-html-data-type")({
+  secret: "xyzzy",
   elements: ["i"]
 });
 ```
 
-Configuration options are ignored on the client.
+The `secret` option "salts" the cryptographic signature to thward scenarios in
+which the attacker has compromised the application database. Configuration
+options are ignored on the client.
 
 
 ## License

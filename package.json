@@ -1,6 +1,21 @@
 {
   "name": "ampersand-sanitized-html-data-type",
-  "version": "0.1.1",
+  "version": "0.2.0",
+  "author": {
+    "name": "Michael Phan-Ba",
+    "email": "michael@mikepb.com"
+  },
+  "homepage": "http://github.com/mikepb/ampersand-sanitized-html-data-type",
+  "keywords": [
+    "amperesand",
+    "crypto",
+    "gumbo",
+    "html",
+    "sanitize",
+    "signature",
+    "whitelist",
+    "xss"
+  ],
   "license": "MIT",
   "main": "index.js",
   "browser": "client.js",
