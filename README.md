@@ -72,9 +72,13 @@ var htmlMixin = require("ampersand-sanitized-html-data-type")({
 });
 ```
 
-The `secret` option "salts" the cryptographic signature to thward scenarios in
-which the attacker has compromised the application database. Configuration
-options are ignored on the client.
+The configuration object is deterministically serialized and its SHA-1 hash
+is used as the SHA-1 HMAC key for signing the raw HTML. The cryptographic
+signature allows us to cache the sanitized HTML in the database while still
+allowing updates to the sanitization options to re-sanitize the raw HTML on
+read. The `secret` option "salts" the cryptographic signature to thward
+scenarios in which the attacker has compromised the application database.
+Configuration options are ignored on the client.
 
 
 ## License

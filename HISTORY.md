@@ -1,3 +1,17 @@
+0.2.2 / 2015-06-16
+==================
+
+  * Changed: Sort object keys when serializing options to digest. Previously
+    cached sanitized HTML will be invalidated, but future accesses with the
+    same options should resolve to the cache more consistently.
+
+
+0.2.1 / 2015-06-14
+==================
+
+  * Added: Keywords in `package.json`.
+
+
 0.2.0 / 2015-06-14
 ==================
 
