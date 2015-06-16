@@ -80,6 +80,13 @@ read. The `secret` option "salts" the cryptographic signature to thward
 scenarios in which the attacker has compromised the application database.
 Configuration options are ignored on the client.
 
+On the client, the unsafe HTML data type will return a blank string after an
+`html` property is updated with a new value. You should account for this
+behavior when setting user-generated HTML values. When persisting data,
+using the `{wait: true}` option with `ampersand-model` to ensure that the
+model always returns sanitized HTML from the server, while still using the
+previously sanitized HTML value.
+
 
 ## License
 
