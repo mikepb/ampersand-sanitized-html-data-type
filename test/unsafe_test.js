@@ -1,7 +1,5 @@
 "use strict";
 
-const tag = 1;
-
 var assert = require("assert");
 var dataType = require("../lib/unsafe");
 
@@ -40,13 +38,13 @@ describe("Unsafe HTML", function () {
       assert.deepEqual(dataType.set({
         raw: "Hello World!",
         html: "html",
-        tag: tag
+        tag: "afudzOg9ZKjB0xB6cQyePOU7DtA"
       }), {
         type: "html",
         val: {
           raw: "Hello World!",
           html: "html",
-          tag: tag
+          tag: "afudzOg9ZKjB0xB6cQyePOU7DtA"
         }
       });
     });

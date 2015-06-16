@@ -1,12 +1,20 @@
 "use strict";
 
-const tag = 1;
-
 var assert = require("assert");
 var sanitize = require("gumbo-sanitize");
 var sanitized = require("../lib/sanitized");
 
 describe("Default Sanitized HTML", function () {
+  var dataType = sanitized();
+  require("./sanitized")("#set", dataType);
+  require("./common")(dataType);
+});
+
+describe("Basic Sanitized HTML with out-of-order option keys", function () {
+  var options = Object.keys(sanitize.BASIC).reverse().reduce(
+    function (memo, key) {
+      return memo[key] = sanitize.BASIC[key], memo;
+    }, {});
   var dataType = sanitized();
   require("./sanitized")("#set", dataType);
   require("./common")(dataType);
@@ -28,7 +36,7 @@ describe("Default Sanitized HTML with custom secret", function () {
       val: {
         raw: "<p><script>Hello World!</script></p>",
         html: "<p>Hello World!</p>",
-        sign: "GEBCuTY0LcMGJFPkWCg+zXmUmPw"
+        sign: "wpvItwtoaq1uzN4K4eyXBAtIQWA"
       }
     });
   });
@@ -36,6 +44,16 @@ describe("Default Sanitized HTML with custom secret", function () {
 
 describe("Relaxed Sanitized HTML", function () {
   var dataType = sanitized(sanitize.RELAXED);
+  require("./sanitized")("#set", dataType, true);
+  require("./common")(dataType);
+});
+
+describe("Relaxed Sanitized HTML with out-of-order option keys", function () {
+  var options = Object.keys(sanitize.RELAXED).reverse().reduce(
+    function (memo, key) {
+      return memo[key] = sanitize.RELAXED[key], memo;
+    }, {});
+  var dataType = sanitized(options);
   require("./sanitized")("#set", dataType, true);
   require("./common")(dataType);
 });

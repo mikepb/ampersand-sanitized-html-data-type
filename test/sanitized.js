@@ -3,11 +3,11 @@
 var assert = require("assert");
 
 module.exports = function (description, dataType, relax) {
-  var plain = relax ? "rc02ZCuezMnpkA+3qssGnUDmmto" : "vKRymzZOZYWoshRBgrJ01qH4rY8";
-  var inScript = relax ? "R2i7IAFAuB9QVxnvuCK0Xr4/hZE" : "379xCu0dmutbkDWBNK5KAIpZ0/Q";
-  var xssScript = relax ? "pi8ugbcuncL4d/+QfoQcrWrtdPQ" : "NkrP4k00G4E1xRMo1CTVLIh/fzI";
-  var bScript = relax ? "Tde+ZuljsgFIu1TKfaUF8mtJdAY" : "ah2Diy0Ate1E88Luti+kmgl9gGU";
-  var inDiv = relax ? "Xawb0oXuz3dmmLyt0TAzGrb9/co" : "mebOqn4xIhGGmBwxIbE1a7moMCg";
+  var plain = relax ? "p479QZH1lFFrg9SLDboe+0iwesU" : "afudzOg9ZKjB0xB6cQyePOU7DtA";
+  var inScript = relax ? "WuW2ho/uq22zqbHd17Lq5ey6roQ" : "F/JKN7XtwdlPoaopOCJlukRM0cs";
+  var xssScript = relax ? "P8XCpbfYCO3uv9fz7+d3nhMGfDQ" : "er1I8ElTLEw8h2YuY0S9+faSOuQ";
+  var bScript = relax ? "nYd71xo+3jAQM6UH/jJaY0eOZHE" : "yCxOQF/gf1pRcVJ6Vh1XpMcFgLQ";
+  var inDiv = relax ? "ObZ+VO+/02POzy7yHq8x+83Mc2w" : "49mn6K70sR9CgBkZQpZdddiwXgo";
 
   describe(description, function () {
     it("should accept a string", function () {
