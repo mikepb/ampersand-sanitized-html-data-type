@@ -36,7 +36,7 @@ describe("Default Sanitized HTML with custom secret", function () {
       val: {
         raw: "<p><script>Hello World!</script></p>",
         html: "<p>Hello World!</p>",
-        sign: "wpvItwtoaq1uzN4K4eyXBAtIQWA"
+        sign: "JNXCqtq7tdF7wZh3WT3C0hlTVuY"
       }
     });
   });
